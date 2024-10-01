@@ -1,8 +1,26 @@
 import { useRef } from "react"
+import { useLanguage } from "./languageContext";
 
 const Task = ({onFormSubmit, Task, Person}) => {
     const TaskRef = useRef()
     const PersonRef = useRef()
+
+    const { language } = useLanguage();
+ 
+    const translations = {
+      en: {
+        Languagetoggle3: 'Submit',
+        placeholder: 'Task name',
+        placeholder2: 'Your name'
+      },
+      ge: {
+        Languagetoggle3: 'ინფორმაციის შეყვანა',
+        placeholder: 'ტასკის სახელი',
+        placeholder2: 'თქვენი სახელი'
+        
+      }
+    };
+  
 
     const onSubmit = (e) => {
         e.preventDefault()
@@ -17,18 +35,18 @@ const Task = ({onFormSubmit, Task, Person}) => {
     return <form onSubmit={onSubmit}>
             <input
                 type="text"
-                placeholder="person name"
+                placeholder={translations[language].placeholder2}
                 ref={PersonRef}
                 defaultValue={Person}
             />
             <input
                 type="text"
-                placeholder="task"
+                placeholder={translations[language].placeholder}
                 ref={TaskRef}
                 defaultValue={Task}
             />
             
-            <button>Submit</button>
+            <button>{translations[language].Languagetoggle3}</button>
         </form>
 }
 
